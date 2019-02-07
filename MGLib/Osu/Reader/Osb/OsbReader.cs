@@ -38,7 +38,7 @@ namespace MGLib.Osu.Reader.Osb
         public string Trigger;
     }
 
-    public class OsbElementList : IEnumerable<Element>
+    public class OsbElementList : IEnumerable<Element>, IDisposable
     {
         private readonly string FilePath;
         private StreamReader Reader;
@@ -441,6 +441,11 @@ namespace MGLib.Osu.Reader.Osb
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public void Dispose()
+        {
+            Reader?.Dispose();
+        }
     }
 
     public class TestOsbReader
